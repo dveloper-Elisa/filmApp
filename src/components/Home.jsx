@@ -100,7 +100,7 @@ const Home = () => {
 
         <div className="flex flex-col">
           <div className="flex flex-end">
-            <i className="text-white fixed fa fa-gear text-[40px] absolute ml-[14%] "></i>
+            <i className="text-white fa fa-gear text-[40px] absolute ml-[14%] "></i>
 
             <i className="text-red-600 cursor-pointer bount fa fa-play mt-[10rem] text-[50px]  "></i>
           </div>
