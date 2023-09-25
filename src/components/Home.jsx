@@ -164,7 +164,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="flex animate-bounce bg-yellow-700 absolute items-center mt-[-60px]">
+      <div className="flex animate-ping bg-yellow-700 absolute items-center mt-[-60px]">
         <div className="text-white text-[30px] font-bold">
           <p>Sugested For Your</p>
         </div>

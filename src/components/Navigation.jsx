@@ -43,7 +43,7 @@ const Navigations = () => {
             <i className="fa fa-user-circle"></i>
 
             <Btn name="Login" link="/login" />
-            <Btn name="Sign up" link="#" />
+            <Btn name="Sign up" link="/signUp" />
           </div>
         </div>
       </div>

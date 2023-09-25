@@ -1,9 +1,30 @@
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 
 const LoginForm = () => {
   const [uName, setuName] = useState([]);
   const [uPassword, setuPassword] = useState([]);
-  const info = () => {};
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user")) || [];
+    if (user == null) {
+      location.href = "/login";
+    }
+  });
+
+  const info = () => {
+    const dataUsers = JSON.parse(localStorage.getItem("user"));
+    const isUserExist = dataUsers.find((user) => {
+      user.mail === uName && user.Password === uPassword;
+    });
+    if (isUserExist) {
+      alert("Welcome to home page");
+      location.href = "/";
+    } else {
+      alert("user not found just signUp");
+      location.href = "/signUp";
+    }
+  };
 
   return (
     <>
@@ -39,14 +60,10 @@ const LoginForm = () => {
           <input
             type="submit"
             className="w-full rounded my-4 text-white p-3 cursor-pointer bg-red-600"
-            value="Login"
+            value={"Sign Up"}
             onClick={(e) => {
               e.preventDefault();
               info();
-              document.getElementById("ps").value = "";
-              document.getElementById("nm").value = "";
-
-              alert("user Name is:" + uName + "Password is: " + uPassword);
             }}
           />
         </form>
