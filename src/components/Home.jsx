@@ -1,65 +1,32 @@
 import Btn from "./Btns";
+import React from "react";
 import Cardcomponect from "./Cardcomponect";
 import Footer from "./footer";
-
+import { useEffect } from "react";
+import axios from "axios";
 const Home = () => {
-  const cards = [
-    [
-      {
-        image: "./asset-10.jpg",
-        name: "Fighting for",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./asset-15.jpg",
-        name: "Jumbal Queen",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./17.jpg",
-        name: "Gohst Coupel",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./asset-8.jpg",
-        name: "Latest Ball",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./asset-6.jpg",
-        name: "The Soldger",
-        duration: "2hr : 50mis",
-      },
-    ],
-    [
-      {
-        image: "./asset-7.jpg",
-        name: "Fighting for",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./Untitled-5.jpg",
-        name: "Jumbal Queen",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./Untitled-4.jpg",
-        name: "Gohst Coupel",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./Untitled-1.jpg",
-        name: "Latest Ball",
-        duration: "2hr : 50mis",
-      },
-      {
-        image: "./asset-14.jpg",
-        name: "The Soldger",
-        duration: "2hr : 50mis",
-      },
-    ],
-  ];
+  const [data, setData] = React.useState([]);
+  useEffect(() => {
+    const getfetch = async () => {
+      const url = "https://api.themoviedb.org/3/movie/now_playing";
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YzI5MWM1YzNjZTI1OWZjY2IxODU0MDc5OGM5MGQ3MCIsInN1YiI6IjYzZDhkZTM1YTkxMTdmMDA5ZGE0MDI3NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.32-d9hDkp91rDw98i-VzmDQIOVZA-0DHeIOn9Af2JTI",
+        },
+      };
 
+      try {
+        const response = await axios.get(url, options);
+        setData(response.data.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getfetch();
+  }, []);
   return (
     <>
       <div className="flex img relative w-[100%] h-[500px] p-[70px] md:flex ">
@@ -108,18 +75,7 @@ const Home = () => {
       </div>
 
       {/* card content Home */}
-      <div className="md:flex md:justify-center bg-gray-800 w-[100%] ">
-        {cards[0].map((films, index) => {
-          return (
-            <Cardcomponect
-              key={index}
-              image={films.image}
-              name={films.name}
-              duration={films.duration}
-            />
-          );
-        })}
-      </div>
+      <div className="md:flex md:justify-center bg-gray-800 w-[100%] "></div>
 
       {/* last Edit films of the year */}
       <div className="bg-gray-900 mt-[-50px]">
@@ -164,26 +120,28 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="flex animate-ping bg-yellow-700 absolute items-center mt-[-60px]">
-        <div className="text-white text-[30px] font-bold">
+      <div className="flexbg-yellow-700 absolute items-center mt-[-90px] animate-pulse">
+        <div className="text-white text-[30px] font-bold ">
           <p>Sugested For Your</p>
         </div>
       </div>
 
       {/* other Card Devision */}
       <div className=" md:flex mb-[6rem] mt-[-50px] ">
-        {cards[1].map((send, index) => {
+        {data.map((item, index) => {
           return (
             <>
               <Cardcomponect
                 key={index}
-                image={send.image}
-                name={send.name}
-                duration={send.duration}
+                id={item.id}
+                image={item.backdrop_path}
+                name={item.original_title}
+                duration={item.vote_average}
               />
             </>
           );
         })}
+        <></>
       </div>
       {/* creatio of the footer */}
 

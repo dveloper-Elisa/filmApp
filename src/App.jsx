@@ -6,6 +6,8 @@ import ImpoDiv from "./pages/importDiv";
 import AllFeature from "./pages/featureDisplay";
 import Pilots from "./pages/displayPilots";
 import SignUpt from "./components/signup";
+import Details from "./components/detailmovie";
+import Trailer from "./components/trailPlay";
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
         <Route path="/quesion" element={<AllFeature />} />
         <Route path="/q3" element={<Pilots />} />
         <Route path="/signUp" element={<SignUpt />} />
+        <Route path="/detailmovie/:id" element={<Details />} />
+        <Route path="/trail/:key" element={<Trailer />} />
       </Routes>
     </>
   );
